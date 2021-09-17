@@ -54,6 +54,9 @@ func child() {
 	// to give it the libs, it needs.
 	must(syscall.Chroot("/"))
 	must(os.Chdir("/"))
+	// Note: when we run 'ps' we look inside our /proc of our host machine
+	// so, to give it a new /proc we need a new file system.
+	// '/proc' is a psudo file system
 	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 
 	must(cmd.Run())
